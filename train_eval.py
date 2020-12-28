@@ -93,12 +93,12 @@ def run(dataset, model, runs, epochs, lr, weight_decay, early_stopping,
         accs.append(test_acc)
         durations.append(t_end - t_start)
 
-        if model.kind != "D" and model.kind != "None":
-            coefs = model.coefs.data.cpu().numpy()
-            # print(coefs)
-            with open("GCN-{}.pk".format(model.kind), "wb") as f:
-                pickle.dump([coefs, data], f)
-            np.save("GCN-{}.npy".format(model.kind), coefs)
+        # if model.kind != "D" and model.kind != "None":
+        #     coefs = model.coefs.data.cpu().numpy()
+        #     # print(coefs)
+        #     with open("GCN-{}.pk".format(model.kind), "wb") as f:
+        #         pickle.dump([coefs, data], f)
+        #     np.save("GCN-{}.npy".format(model.kind), coefs)
 
     loss, acc, duration = tensor(val_losses), tensor(accs), tensor(durations)
 
