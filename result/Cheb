@@ -1,0 +1,44 @@
+Cheb
+===================
+The Model - C
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\drelu.py:78: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x_norm = F.softmax(x).view(-1, 1)
+Val Loss: 0.8070, Test Accuracy: 0.804 ± 0.010, Duration: 4.149
+The Model - B
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.8030, Test Accuracy: 0.801 ± 0.010, Duration: 3.822
+The Model - A
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.8215, Test Accuracy: 0.804 ± 0.009, Duration: 3.736
+The Model - None
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.8136, Test Accuracy: 0.800 ± 0.012, Duration: 3.563
+The Model - C
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\drelu.py:78: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x_norm = F.softmax(x).view(-1, 1)
+Val Loss: 0.6854, Test Accuracy: 0.692 ± 0.023, Duration: 8.990
+The Model - B
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.6441, Test Accuracy: 0.718 ± 0.022, Duration: 8.704
+The Model - A
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.6518, Test Accuracy: 0.710 ± 0.023, Duration: 8.786
+The Model - None
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.6721, Test Accuracy: 0.714 ± 0.023, Duration: 8.301
+The Model - C
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\drelu.py:78: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x_norm = F.softmax(x).view(-1, 1)
+Val Loss: 1.0061, Test Accuracy: 0.692 ± 0.006, Duration: 8.079
+The Model - B
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.9889, Test Accuracy: 0.691 ± 0.008, Duration: 7.837
+The Model - A
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 0.9823, Test Accuracy: 0.690 ± 0.007, Duration: 7.809
+The Model - None
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=200, hidden=16, lr=0.01, normalize_features=True, num_hops=3, random_splits=False, runs=10, weight_decay=0.0005)
+Val Loss: 1.0152, Test Accuracy: 0.687 ± 0.007, Duration: 7.604

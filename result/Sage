@@ -1,0 +1,77 @@
+sage
+===================
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+The Model - D
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\train_eval.py:28: UserWarning: This overload of nonzero is deprecated:
+        nonzero()
+Consider using one of the following signatures instead:
+        nonzero(*, bool as_tuple) (Triggered internally at  ..\torch\csrc\utils\python_arg_parser.cpp:766.)
+  index = (data.y == i).nonzero().view(-1)
+D:\anaconda3\lib\site-packages\torch\nn\functional.py:1625: UserWarning: nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.
+  warnings.warn("nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.")
+Val Loss: 1.2454, Test Accuracy: 0.564 ± 0.146, Duration: 2.789
+The Model - C
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\drelu.py:78: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x_norm = F.softmax(x).view(-1, 1)
+Val Loss: 0.7149, Test Accuracy: 0.772 ± 0.017, Duration: 3.388
+The Model - B
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.7192, Test Accuracy: 0.778 ± 0.016, Duration: 2.905
+The Model - A
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.7215, Test Accuracy: 0.773 ± 0.028, Duration: 2.934
+The Model - None
+Namespace(dataset='Cora', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.7147, Test Accuracy: 0.787 ± 0.019, Duration: 2.339
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+The Model - D
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\train_eval.py:28: UserWarning: This overload of nonzero is deprecated:
+        nonzero()
+Consider using one of the following signatures instead:
+        nonzero(*, bool as_tuple) (Triggered internally at  ..\torch\csrc\utils\python_arg_parser.cpp:766.)
+  index = (data.y == i).nonzero().view(-1)
+D:\anaconda3\lib\site-packages\torch\nn\functional.py:1625: UserWarning: nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.
+  warnings.warn("nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.")
+Val Loss: 0.8679, Test Accuracy: 0.605 ± 0.065, Duration: 6.953
+The Model - C
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\drelu.py:78: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x_norm = F.softmax(x).view(-1, 1)
+Val Loss: 0.6113, Test Accuracy: 0.746 ± 0.027, Duration: 6.590
+The Model - B
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.6302, Test Accuracy: 0.736 ± 0.037, Duration: 5.852
+The Model - A
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.6280, Test Accuracy: 0.740 ± 0.032, Duration: 5.955
+The Model - None
+Namespace(dataset='PubMed', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.6020, Test Accuracy: 0.760 ± 0.032, Duration: 5.281
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+The Model - D
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\train_eval.py:28: UserWarning: This overload of nonzero is deprecated:
+        nonzero()
+Consider using one of the following signatures instead:
+        nonzero(*, bool as_tuple) (Triggered internally at  ..\torch\csrc\utils\python_arg_parser.cpp:766.)
+  index = (data.y == i).nonzero().view(-1)
+D:\anaconda3\lib\site-packages\torch\nn\functional.py:1625: UserWarning: nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.
+  warnings.warn("nn.functional.sigmoid is deprecated. Use torch.sigmoid instead.")
+Val Loss: 1.5015, Test Accuracy: 0.443 ± 0.116, Duration: 4.778
+The Model - C
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+d:\workspace\graphRelu\drelu.py:78: UserWarning: Implicit dimension choice for softmax has been deprecated. Change the call to include dim=X as an argument.
+  x_norm = F.softmax(x).view(-1, 1)
+Val Loss: 0.9909, Test Accuracy: 0.676 ± 0.010, Duration: 5.405
+The Model - B
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.9821, Test Accuracy: 0.680 ± 0.014, Duration: 4.951
+The Model - A
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 0.9556, Test Accuracy: 0.682 ± 0.024, Duration: 4.931
+The Model - None
+Namespace(dataset='CiteSeer', dropout=0.5, early_stopping=10, epochs=400, hidden=16, lr=0.01, normalize_features=True, random_splits=True, runs=10, weight_decay=0.0005)
+Val Loss: 1.0125, Test Accuracy: 0.669 ± 0.018, Duration: 4.400
