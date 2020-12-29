@@ -176,8 +176,7 @@ class EdgeReluV2(MessagePassing):
         self.sigmoid = nn.Sigmoid()
 
         self.register_buffer('lambdas', torch.Tensor([1.]*k + [0.5]*k).float())
-        self.register_buffer('init_v', torch.Tensor(
-            [1.] + [0.]*(2*k - 1)).float())
+        self.register_buffer('init_v', torch.Tensor([1.] + [0.]*(2*k - 1)).float())
 
         self.att_l = Parameter(torch.Tensor(1, channels))
         self.att_r = Parameter(torch.Tensor(1, channels))
@@ -237,6 +236,8 @@ class EdgeReluV2(MessagePassing):
         alpha = alpha.view(-1, 1, 1)
         # relu_coefs = (alpha * self.theta) * self.lambdas + self.init_v
         relu_coefs = (self.theta * self.lambdas + self.init_v) * alpha
+        relu_coefs = F.dropout(relu_coefs, 0.2, training=self.training)
+        
         x = x_j
         x = x.unsqueeze(-1)
         x_perm = x.permute(2, 0, 1).unsqueeze(-1)

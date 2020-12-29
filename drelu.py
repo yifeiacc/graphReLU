@@ -72,6 +72,7 @@ class DyReLUC(DyReLU):
         self.fc2 = nn.Linear(channels // reduction, 2*k*channels)
 #         self.pos = GraphConv(channels, 1)
         self.pos = GCNConv(channels,  1)
+        self.dropout = nn.Dropout(0.2)
 
     def pos_coefs(self, x, edge_index):
         x = self.pos(x, edge_index)
@@ -84,11 +85,10 @@ class DyReLUC(DyReLU):
     def forward(self, x, edge_index):
         assert x.shape[1] == self.channels
         theta = self.get_relu_coefs(x, edge_index)
-        relu_coefs = theta.view(-1, self.channels, 2 *
-                                self.k)
+        relu_coefs = theta.view(-1, self.channels, 2 * self.k)
         pos_norm_coefs = self.pos_coefs(x, edge_index).view(-1, 1, 1)
         relu_coefs = relu_coefs * pos_norm_coefs * self.lambdas + self.init_v
-
+        relu_coefs = F.dropout(relu_coefs, 0.2, training=self.training)
         x = x.unsqueeze(-1)
         x_perm = x.permute(2, 0, 1).unsqueeze(-1)
         output = x_perm * relu_coefs[:, :, :self.k] + relu_coefs[:, :, self.k:]
@@ -127,6 +127,9 @@ class DyReLUE(DyReLU):
         theta = self.get_relu_coefs(x)
         relu_coefs = theta.view(-1, self.channels, 2 *
                                 self.k)
+
+        
+
         pos_norm_coefs = self.pos_coefs(x).view(-1, 1, 1)
         relu_coefs = relu_coefs * pos_norm_coefs * self.lambdas + self.init_v
 
