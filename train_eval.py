@@ -1,4 +1,5 @@
 from __future__ import division
+import pickle
 
 import time
 
@@ -10,7 +11,6 @@ import sys
 import pandas as pd
 import numpy as np
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-import pickle
 
 
 def index_to_mask(index, size):
@@ -143,7 +143,8 @@ def experiment(args, Net, dataset, name):
     print(args)
     permute_masks = random_planetoid_splits if args.random_splits else None
 
-    lst = ["D", "C"]
+    # lst = ["D", "C"]
+    lst = ["ReLU", "PReLU", "ELU", "PReLU"]
     results = []
 
     for i in lst:

@@ -64,8 +64,14 @@ class Net(torch.nn.Module):
             x = self.dreluC(self.conv1(x, edge_index), edge_index)
         elif self.kind == "D":
             x = self.dreluD(self.conv1(x, edge_index), edge_index)
-        else:
+        elif self.kind == "ReLU":
             x = F.relu(self.conv1(x, edge_index))
+        elif self.kind == "PReLU":
+            x = F.prelu(self.conv1(x, edge_index, weight=0.25))
+        elif self.kind == "ELU":
+            x = F.elu(self.conv1(x, edge_index), alpha=1)
+        elif self.kind == "LReLU":
+            x = F.leaky_relu(self.conv1(x, edge_index), negative_slope=0.01)
         x = F.dropout(x, p=args.dropout, training=self.training)
         x = self.conv2(x, edge_index)
         return F.log_softmax(x, dim=1)

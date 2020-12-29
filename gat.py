@@ -50,7 +50,7 @@ class Net(torch.nn.Module):
     def forward(self, data):
         x, edge_index = data.x, data.edge_index
         x = F.dropout(x, p=args.dropout, training=self.training)
-        if self.kind == "A":
+         if self.kind == "A":
             x = self.dreluA(self.conv1(x, edge_index), edge_index)
         elif self.kind == "B":
             x = self.dreluB(self.conv1(x, edge_index), edge_index)
@@ -58,8 +58,14 @@ class Net(torch.nn.Module):
             x = self.dreluC(self.conv1(x, edge_index), edge_index)
         elif self.kind == "D":
             x = self.dreluD(self.conv1(x, edge_index), edge_index)
-        else:
-            x = F.elu(self.conv1(x, edge_index))
+        elif self.kind == "ReLU":
+            x = F.relu(self.conv1(x, edge_index))
+        elif self.kind == "PReLU":
+            x = F.prelu(self.conv1(x, edge_index, weight=0.25))
+        elif self.kind == "ELU":
+            x = F.elu(self.conv1(x, edge_index), alpha=1)
+        elif self.kind == "LReLU":
+            x = F.leaky_relu(self.conv1(x, edge_index), negative_slope=0.01)
         # x = F.elu(self.conv1(x, edge_index))
         x = F.dropout(x, p=args.dropout, training=self.training)
         x = self.conv2(x, edge_index)

@@ -24,7 +24,7 @@ def str2bool(v):
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, required=True)
 parser.add_argument('--random_splits', type=str2bool, default=True)
-parser.add_argument('--runs', type=int, default=10)
+parser.add_argument('--runs', type=int, default=30)
 parser.add_argument('--epochs', type=int, default=300)
 parser.add_argument('--lr', type=float, default=0.01)
 parser.add_argument('--weight_decay', type=float, default=0.0005)
@@ -49,6 +49,8 @@ class Net(torch.nn.Module):
         self.dreluB = DyReLUB(args.hidden)
         self.dreluC = DyReLUC(args.hidden)
         self.dreluD = EdgeReluV2(args.hidden)
+        self.relu = torch.nn.PReLU()
+        torch.nn.ELU()
 
     def reset_parameters(self):
         self.conv1.reset_parameters()
@@ -64,8 +66,15 @@ class Net(torch.nn.Module):
             x = self.dreluC(self.conv1(x, edge_index), edge_index)
         elif self.kind == "D":
             x = self.dreluD(self.conv1(x, edge_index), edge_index)
-        else:
+        elif self.kind == "ReLU":
             x = F.relu(self.conv1(x, edge_index))
+        elif self.kind == "PReLU":
+            x = F.prelu(self.conv1(x, edge_index, weight=0.25))
+        elif self.kind == "ELU":
+            x = F.elu(self.conv1(x, edge_index), alpha=1)
+        elif self.kind == "LReLU":
+            x = F.leaky_relu(self.conv1(x, edge_index), negative_slope=0.01)
+            
         x = F.dropout(x, p=args.dropout, training=self.training)
         x = self.conv2(x, edge_index)
         # if not self.training:
@@ -78,7 +87,6 @@ class Net(torch.nn.Module):
         #         self.coefs = self.dreluC.coefs
 
         return F.log_softmax(x, dim=1)
-
 
 
 if __name__ == "__main__":
