@@ -42,6 +42,7 @@ class Net(torch.nn.Module):
         self.dreluB = DyReLUB(args.hidden * args.heads)
         self.dreluC = DyReLUC(args.hidden * args.heads)
         self.dreluD = EdgeReluV2(args.hidden * args.heads)
+        self.PReLU = torch.nn.PReLU()
 
     def reset_parameters(self):
         self.conv1.reset_parameters()
@@ -61,7 +62,7 @@ class Net(torch.nn.Module):
         elif self.kind == "ReLU":
             x = F.relu(self.conv1(x, edge_index))
         elif self.kind == "PReLU":
-            x = F.prelu(self.conv1(x, edge_index), weight=0.25)
+            x = self.PReLU(self.conv1(x, edge_index))
         elif self.kind == "ELU":
             x = F.elu(self.conv1(x, edge_index), alpha=1)
         elif self.kind == "LReLU":
