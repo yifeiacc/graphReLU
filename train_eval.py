@@ -153,8 +153,13 @@ def experiment(args, Net, dataset, name):
     for i in lst:
         print("The Model - {}".format(i))
         print(args)
-        mean, std = run(dataset, Net(dataset, kind=i), args.runs, args.epochs, args.lr, args.weight_decay,
-                        args.early_stopping, permute_masks)
+        if (args.dataset == 'BlogCatalog' or args.dataset=='flickr') and i == "D":
+            mean, std = run(dataset, Net(dataset, kind=i), args.runs, args.epochs*3, args.lr, args.weight_decay,
+                                args.early_stopping, permute_masks)
+        else:
+            mean, std = run(dataset, Net(dataset, kind=i), args.runs, args.epochs, args.lr, args.weight_decay,
+                            args.early_stopping, permute_masks)
+
         results.append("{:.3f} ± {:.3f}".format(mean, std))
 
     print("Model: {}".format(__file__))
