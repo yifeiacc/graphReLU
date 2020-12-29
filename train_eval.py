@@ -144,7 +144,10 @@ def experiment(args, Net, dataset, name):
     permute_masks = random_planetoid_splits if args.random_splits else None
 
     # lst = ["D", "C"]
-    lst = ["ReLU", "PReLU", "ELU", "PReLU"]
+    # lst = ["ReLU", "PReLU", "ELU", "LReLU"]
+    # lst = ["D"]
+    # lst = ["LReLU"]
+    lst = ["D", "C", "B", "ReLU", "PReLU", "ELU", "LReLU"]
     results = []
 
     for i in lst:
