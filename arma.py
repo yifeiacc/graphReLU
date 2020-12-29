@@ -67,7 +67,7 @@ class Net(torch.nn.Module):
         elif self.kind == "ReLU":
             x = F.relu(self.conv1(x, edge_index))
         elif self.kind == "PReLU":
-            x = F.prelu(self.conv1(x, edge_index, weight=0.25))
+            x = F.prelu(self.conv1(x, edge_index), weight=0.25)
         elif self.kind == "ELU":
             x = F.elu(self.conv1(x, edge_index), alpha=1)
         elif self.kind == "LReLU":

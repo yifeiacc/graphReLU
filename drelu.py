@@ -88,7 +88,7 @@ class DyReLUC(DyReLU):
         relu_coefs = theta.view(-1, self.channels, 2 * self.k)
         pos_norm_coefs = self.pos_coefs(x, edge_index).view(-1, 1, 1)
         relu_coefs = relu_coefs * pos_norm_coefs * self.lambdas + self.init_v
-        relu_coefs = F.dropout(relu_coefs, 0.2, training=self.training)
+        # relu_coefs = F.dropout(relu_coefs, 0.2, training=self.training)
         x = x.unsqueeze(-1)
         x_perm = x.permute(2, 0, 1).unsqueeze(-1)
         output = x_perm * relu_coefs[:, :, :self.k] + relu_coefs[:, :, self.k:]

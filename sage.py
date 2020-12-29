@@ -39,8 +39,10 @@ args = parser.parse_args()
 class Net(torch.nn.Module):
     def __init__(self, dataset, kind="None"):
         super(Net, self).__init__()
-        self.conv1 = SAGEConv(dataset.num_features, args.hidden, normalize=False)
-        self.conv2 = SAGEConv(args.hidden, dataset.num_classes, normalize=False)
+        self.conv1 = SAGEConv(dataset.num_features,
+                              args.hidden, normalize=False)
+        self.conv2 = SAGEConv(
+            args.hidden, dataset.num_classes, normalize=False)
 
         self.kind = kind
         self.dreluA = DyReLUA(args.hidden)
@@ -54,7 +56,7 @@ class Net(torch.nn.Module):
 
     def forward(self, data):
         x, edge_index = data.x, data.edge_index
-         if self.kind == "A":
+        if self.kind == "A":
             x = self.dreluA(self.conv1(x, edge_index), edge_index)
         elif self.kind == "B":
             x = self.dreluB(self.conv1(x, edge_index), edge_index)
@@ -65,7 +67,7 @@ class Net(torch.nn.Module):
         elif self.kind == "ReLU":
             x = F.relu(self.conv1(x, edge_index))
         elif self.kind == "PReLU":
-            x = F.prelu(self.conv1(x, edge_index, weight=0.25))
+            x = F.prelu(self.conv1(x, edge_index), weight=0.25)
         elif self.kind == "ELU":
             x = F.elu(self.conv1(x, edge_index), alpha=1)
         elif self.kind == "LReLU":
