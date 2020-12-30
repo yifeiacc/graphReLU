@@ -9,6 +9,7 @@ from torch_sparse import SparseTensor, set_diag
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 from torch_geometric.utils import degree
+import pickle
 
 
 class EdgeRelu(MessagePassing):
@@ -143,6 +144,8 @@ class EdgeReluV1(MessagePassing):
         out = self.propagate(edge_index, x=(x_l, x_r),
                              alpha=(alpha_l, alpha_r), size=size)
         return out
+
+    
 
     def message(self,  x_j, alpha_j, alpha_i, index, ptr, size_i):
         theta = alpha_j if alpha_i is None else alpha_j + alpha_i
@@ -327,6 +330,8 @@ class EdgeReluV2(MessagePassing):
         alpha = alpha.view(-1, 1, 1)
         relu_coefs = self.theta * self.lambdas * alpha + self.init_v
         # relu_coefs = F.dropout(relu_coefs, 0.2, training=self.training)
+        # if not self.training:
+        #     with open("./result/Graph_ReLU_edge")
         return self.active(x_j, relu_coefs, self.k)
 
     def active(self, x, coef, k):
