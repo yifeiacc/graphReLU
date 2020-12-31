@@ -107,7 +107,9 @@ def run(dataset, model, runs, epochs, lr, weight_decay, early_stopping,
                  acc.mean().item(),
                  acc.std().item(),
                  duration.mean().item()))
-    return acc.mean().item(), acc.std().item()
+    re_acc = ",".join(["{:.3f}".format(i) for i in acc])
+    re_loss = ",".join(["{:.3f}".format(i) for i in loss])
+    return acc.mean().item(), acc.std().item(), acc.max().item(), re_acc, re_loss
 
 
 def train(model, optimizer, data):
@@ -143,26 +145,35 @@ def experiment(args, Net, dataset, name):
     print(args)
     permute_masks = random_planetoid_splits if args.random_splits else None
 
-    # lst = ["D", "C"]
+    lst = ["D", "C"]
     # lst = ["ReLU", "PReLU", "ELU", "LReLU"]
     # lst = ["D"]
     # lst = ["LReLU"]
-    lst = ["D", "C", "B", "ReLU", "PReLU", "ELU", "LReLU"]
+    # lst = ["D", "C", "B", "ReLU", "PReLU", "ELU", "LReLU"]
     results = []
-
+    best = []
+    re_acc_lst = []
+    re_loss_lst = []
+    
     for i in lst:
         print("The Model - {}".format(i))
         print(args)
-        if (args.dataset == 'BlogCatalog' or args.dataset=='flickr') and i == "D":
-            mean, std = run(dataset, Net(dataset, kind=i), args.runs, args.epochs*3, args.lr, args.weight_decay,
-                                args.early_stopping, permute_masks)
+        if (args.dataset == 'BlogCatalog' or args.dataset == 'flickr') and i == "D":
+            mean, std, mx, re_acc, re_loss = run(dataset, Net(dataset, kind=i), args.runs, args.epochs*3, args.lr, args.weight_decay,
+                            args.early_stopping, permute_masks)
         else:
-            mean, std = run(dataset, Net(dataset, kind=i), args.runs, args.epochs, args.lr, args.weight_decay,
+            mean, std, mx, re_acc, re_loss = run(dataset, Net(dataset, kind=i), args.runs, args.epochs, args.lr, args.weight_decay,
                             args.early_stopping, permute_masks)
 
         results.append("{:.3f} ± {:.3f}".format(mean, std))
+        best.append("{:.3f}".format(mx))
+        re_acc_lst.append(re_acc)
+        re_loss_lst.append(re_loss)
 
     print("Model: {}".format(__file__))
     with open(".\\result\\{}-{}.csv".format(name, args.dataset), "w") as f:
         f.write("   ".join(lst) + "\n")
         f.write("   ".join(results) + "\n")
+        f.write("   ".join(best) + "\n")
+        f.write("   ".join(re_acc_lst) + "\n")
+        f.write("   ".join(re_loss_lst) + "\n")

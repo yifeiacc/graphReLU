@@ -22,6 +22,7 @@ def str2bool(v):
 
 
 parser = argparse.ArgumentParser()
+parser.add_argument('--kfun', type=int, default=2)
 parser.add_argument('--dataset', type=str, required=True)
 parser.add_argument('--random_splits', type=str2bool, default=True)
 parser.add_argument('--runs', type=int, default=30)
@@ -32,14 +33,14 @@ parser.add_argument('--early_stopping', type=int, default=10)
 parser.add_argument('--hidden', type=int, default=16)
 parser.add_argument('--dropout', type=float, default=0.5)
 parser.add_argument('--normalize_features', type=str2bool, default=True)
-
 args = parser.parse_args()
 # print("asdasda")
 # print(args.random_splits)
+print(args.kfun)
 
 
 class Net(torch.nn.Module):
-    def __init__(self, dataset, kind="None"):
+    def __init__(self, dataset, kind="ReLU"):
         super(Net, self).__init__()
         self.conv1 = GCNConv(dataset.num_features, args.hidden)
         self.conv2 = GCNConv(args.hidden, dataset.num_classes)
@@ -47,8 +48,8 @@ class Net(torch.nn.Module):
         self.kind = kind
         self.dreluA = DyReLUA(args.hidden)
         self.dreluB = DyReLUB(args.hidden)
-        self.dreluC = DyReLUC(args.hidden)
-        self.dreluD = EdgeReluV2(args.hidden)
+        self.dreluC = DyReLUC(args.hidden, k=args.kfun)
+        self.dreluD = EdgeReluV2(args.hidden, k=args.kfun)
         self.PReLU = torch.nn.PReLU()
 
     def reset_parameters(self):

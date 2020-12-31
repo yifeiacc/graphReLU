@@ -330,8 +330,10 @@ class EdgeReluV2(MessagePassing):
         alpha = alpha.view(-1, 1, 1)
         relu_coefs = self.theta * self.lambdas * alpha + self.init_v
         # relu_coefs = F.dropout(relu_coefs, 0.2, training=self.training)
-        # if not self.training:
-        #     with open("./result/Graph_ReLU_edge")
+        if not self.training:
+            # print("saving")
+            with open("./result/Graph_ReLU_edge","wb") as f:
+                pickle.dump(relu_coefs, f)
         return self.active(x_j, relu_coefs, self.k)
 
     def active(self, x, coef, k):

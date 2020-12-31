@@ -2,7 +2,7 @@ from torch_geometric.nn import GCNConv
 import torch.nn as nn
 import torch
 import torch.nn.functional as F
-
+import pickle
 
 class DyReLU(nn.Module):
     def __init__(self, channels, reduction=4, k=2):
@@ -94,6 +94,9 @@ class DyReLUC(DyReLU):
         output = x_perm * relu_coefs[:, :, :self.k] + relu_coefs[:, :, self.k:]
         result = torch.max(output, dim=-1)[0].permute(1, 2, 0).squeeze()
         self.coefs = relu_coefs
+        # if not self.training:
+        #     with open("./result/Graph_ReLU_Node","wb") as f:
+        #         pickle.dump(relu_coefs, f)
         return result
 
 
@@ -104,7 +107,7 @@ class DyReLUE(DyReLU):
         self.fc2 = nn.Linear(channels // reduction, 2*k*channels)
 #         self.pos = GraphConv(channels, 1)
         self.pos = nn.Linear(channels,  1)
-    
+
     def get_relu_coefs(self, x):
         theta = x
         theta = self.fc1(theta)
@@ -127,8 +130,6 @@ class DyReLUE(DyReLU):
         theta = self.get_relu_coefs(x)
         relu_coefs = theta.view(-1, self.channels, 2 *
                                 self.k)
-
-        
 
         pos_norm_coefs = self.pos_coefs(x).view(-1, 1, 1)
         relu_coefs = relu_coefs * pos_norm_coefs * self.lambdas + self.init_v
